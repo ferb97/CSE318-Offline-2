@@ -2,12 +2,10 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static final int NUMBER_OF_PITS = 6;
-    public static final int NUMBER_OF_BEADS = 4;
     public static final int PLAYER0_DEPTH = 6;
     public static final int PLAYER1_DEPTH = 6;
-    public static final int PLAYER0_HEURISTIC = 4;
-    public static final int PLAYER1_HEURISTIC = 4;
+    public static final int PLAYER0_HEURISTIC = Heuristic.HEURISTIC_4;
+    public static final int PLAYER1_HEURISTIC = Heuristic.HEURISTIC_4;
 
     public static void main(String[] args) {
         Board board = new Board();
@@ -54,7 +52,6 @@ public class Main {
         prevBoard.copyBoard(board);
         while(!board.isGameOver()){
             System.out.println("Player" + playerTurn + "'s Turn");
-            System.out.print("Enter Pit Number: ");
             int pitNumber;
             if(playerTurn == 0){
                pitNumber = player0.getPlayerMove(board, prevBoard);

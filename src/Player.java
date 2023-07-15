@@ -76,8 +76,18 @@ public class Player {
 
     public int getHumanMove(){
         Scanner scn = new Scanner(System.in);
-        System.out.print("Enter Move: ");
-        int move = scn.nextInt();
+        int move;
+        while(true) {
+            try {
+                System.out.print("Enter Pit Number: ");
+                move = scn.nextInt();
+                break;
+            }
+            catch(Exception e){
+                System.out.println("Invalid Move. Try Again.");
+                scn.nextLine();
+            }
+        }
         return move;
     }
 
@@ -105,7 +115,7 @@ public class Player {
         if(isMaxMode){
            int bestMove = -1, maxValue = Integer.MIN_VALUE;
 
-           for(int i = 0; i < Main.NUMBER_OF_PITS; i++){
+           for(int i = 0; i < Board.NUMBER_OF_PITS; i++){
                if(board.getPits()[id][i] > 0){
                   int nextPlayer = board.playMove(id, i);
                   int currentValue;
@@ -127,7 +137,7 @@ public class Player {
                   if(maxValue > alpha){
                      alpha = maxValue;
                   }
-                  if(beta < alpha){
+                  if(beta <= alpha){
                      break;
                   }
                   board.copyBoard(oldBoard);
@@ -145,7 +155,7 @@ public class Player {
         else{
             int minValue = Integer.MAX_VALUE;
 
-            for(int i = 0; i < Main.NUMBER_OF_PITS; i++){
+            for(int i = 0; i < Board.NUMBER_OF_PITS; i++){
                 if(board.getPits()[1 - id][i] > 0){
                     int nextPlayer = board.playMove(1 - id, i);
                     int currentValue;
@@ -166,7 +176,7 @@ public class Player {
                     if(minValue < beta){
                         beta = minValue;
                     }
-                    if(beta < alpha){
+                    if(beta <= alpha){
                         break;
                     }
                     board.copyBoard(oldBoard);
