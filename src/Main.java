@@ -4,8 +4,8 @@ public class Main {
 
     public static final int PLAYER0_DEPTH = 6;
     public static final int PLAYER1_DEPTH = 6;
-    public static final int PLAYER0_HEURISTIC = Heuristic.HEURISTIC_4;
-    public static final int PLAYER1_HEURISTIC = Heuristic.HEURISTIC_4;
+    public static final int PLAYER0_HEURISTIC = Heuristic.HEURISTIC_1;
+    public static final int PLAYER1_HEURISTIC = Heuristic.HEURISTIC_1;
 
     public static void main(String[] args) {
         Board board = new Board();

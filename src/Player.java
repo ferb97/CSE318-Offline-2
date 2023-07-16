@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
@@ -94,15 +97,7 @@ public class Player {
     public int minimaxAlgorithmWithAlphaBetaPruning(Board board, Board prevBoard, boolean isMaxMode, int searchDepthRemaining, int alpha, int beta){
 
         if(board.isGameOver()){
-           if(board.getWinner() == id){
-              return Integer.MAX_VALUE / 2;
-           }
-           else if(board.getWinner() == 1 - id){
-              return Integer.MIN_VALUE / 2;
-           }
-           else{
-              return getHeuristicCost(board, prevBoard);
-           }
+            return getHeuristicCost(board, prevBoard);
         }
 
         if(searchDepthRemaining == 0){
@@ -111,13 +106,20 @@ public class Player {
 
         Board oldBoard = new Board();
         oldBoard.copyBoard(board);
+        List<Integer> arr = new ArrayList<>();
+
+        for(int i = 0; i < Board.NUMBER_OF_PITS; i++){
+            arr.add(i);
+        }
+        Collections.shuffle(arr);
 
         if(isMaxMode){
            int bestMove = -1, maxValue = Integer.MIN_VALUE;
 
            for(int i = 0; i < Board.NUMBER_OF_PITS; i++){
-               if(board.getPits()[id][i] > 0){
-                  int nextPlayer = board.playMove(id, i);
+               Integer currentMove = arr.get(i);
+               if(board.getPits()[id][currentMove] > 0){
+                  int nextPlayer = board.playMove(id, currentMove);
                   int currentValue;
 
                   if(nextPlayer == id){
@@ -131,7 +133,7 @@ public class Player {
 
                   if(currentValue > maxValue){
                      maxValue = currentValue;
-                     bestMove = i;
+                     bestMove = currentMove;
                   }
 
                   if(maxValue > alpha){
@@ -156,8 +158,9 @@ public class Player {
             int minValue = Integer.MAX_VALUE;
 
             for(int i = 0; i < Board.NUMBER_OF_PITS; i++){
-                if(board.getPits()[1 - id][i] > 0){
-                    int nextPlayer = board.playMove(1 - id, i);
+                Integer currentMove = arr.get(i);
+                if(board.getPits()[1 - id][currentMove] > 0){
+                    int nextPlayer = board.playMove(1 - id, currentMove);
                     int currentValue;
 
                     if(nextPlayer == 1 - id){

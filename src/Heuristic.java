@@ -4,10 +4,10 @@ public class Heuristic {
     public static final int HEURISTIC_2 = 2;
     public static final int HEURISTIC_3 = 3;
     public static final int HEURISTIC_4 = 4;
-    public static final int W1 = 5;
-    public static final int W2 = 3;
-    public static final int W3 = 6;
-    public static final int W4 = 8;
+    public static final int W1 = 6;
+    public static final int W2 = 4;
+    public static final int W3 = 3;
+    public static final int W4 = 5;
 
     public static int heuristicStorage(int playerId, Board board){
         return board.getStorage()[playerId] - board.getStorage()[1 - playerId];

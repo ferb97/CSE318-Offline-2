@@ -130,6 +130,12 @@ public class Board {
         }
 
         if(beadsLeftPlayer0 == 0 || beadsLeftPlayer1 == 0){
+           storage[0] += beadsLeftPlayer0;
+           storage[1] += beadsLeftPlayer1;
+            for(int i = 0; i < NUMBER_OF_PITS; i++){
+                pits[0][i] = 0;
+                pits[1][i] = 0;
+            }
            return true;
         }
         return false;
@@ -140,18 +146,10 @@ public class Board {
            return -1;
         }
 
-        int beadsPlayer0 = storage[0];
-        int beadsPlayer1 = storage[1];
-
-        for(int i = 0; i < NUMBER_OF_PITS; i++){
-            beadsPlayer0 += pits[0][i];
-            beadsPlayer1 += pits[1][i];
-        }
-
-        if(beadsPlayer0 > beadsPlayer1){
+        if(storage[0] > storage[1]){
            return 0;
         }
-        else if(beadsPlayer1 > beadsPlayer0){
+        else if(storage[1] > storage[0]){
            return 1;
         }
         else{
@@ -164,12 +162,7 @@ public class Board {
            return -1;
         }
 
-        int finalStorage = storage[playerId];
-
-        for(int i = 0; i < NUMBER_OF_PITS; i++){
-            finalStorage += pits[playerId][i];
-        }
-        return finalStorage;
+        return storage[playerId];
     }
 
     public void printBoard(){
